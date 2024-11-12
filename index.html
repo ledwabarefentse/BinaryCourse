@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: 'unsafe-inline' 'unsafe-eval';">
+  <title>Binary Lesson Slides</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <video autoplay muted loop id="backgroundVideo">
+    <source src="assets/background.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container">
+    <div id="animatedTitleContainer">
+      <h1 id="animatedTitle">WELCOME TO THE REAL WORLD</h1>
+      <h2 id="subtitle">BINARY</h2>
+    </div>
+    <div class="grid" id="slideGrid">
+      <!-- The grid tiles will load from JavaScript -->
+    </div>
+  </div>
+
+  <!-- Modal for displaying lesson content -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <div class="slide-header">
+        <h2 id="modalTitle"></h2>
+        <p id="slideCounter"></p>
+      </div>
+      <div id="modalContent"></div>
+      <div class="slide-controls">
+        <button id="prevSlide" class="slide-btn">Previous</button>
+        <button id="nextSlide" class="slide-btn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

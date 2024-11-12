@@ -1,0 +1,274 @@
+/* Reset and basic styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #0d0d0d;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background Video Styling */
+#backgroundVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  text-align: center;
+  padding: 40px 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Title Animation */
+#animatedTitleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1#animatedTitle {
+  font-size: 2.8em;
+  font-weight: bold;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #00ff00;
+  width: 0;
+  animation: typing 4s steps(30, end) forwards, blinkCursor 0.75s step-end 4s forwards;
+}
+
+h2#subtitle {
+  font-size: 4em;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 4s forwards;
+}
+
+.move-up {
+  animation: moveUp 1s ease-in-out forwards;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blinkCursor {
+  0%, 50% { border-color: #00ff00; }
+  100% { border-color: transparent; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes moveUp {
+  to {
+    transform: translateY(-150px);
+    opacity: 0.9;
+  }
+}
+
+/* Grid styling for tiles */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-top: 40px;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.grid.visible {
+  opacity: 1;
+}
+
+.tile {
+  padding: 30px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+}
+
+.tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 255, 0, 0.6);
+}
+
+.tile h3 {
+  font-size: 1.2em;
+  color: #00ff00;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Modal content styling */
+.modal-content {
+  background-color: #1a1a1a;
+  padding: 30px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 900px;
+  height: 75vh; /* Consistent height */
+  box-shadow: 0 10px 30px rgba(0, 255, 0, 0.5);
+  color: #e0e0e0;
+  text-align: center;
+  position: relative;
+  animation: modalSlideIn 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Modal Content Styling */
+#modalContent {
+  font-size: 1.2em;
+  line-height: 1.8;
+  color: #b3ffb3;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.3);
+  width: 100%;
+  max-width: 850px; /* Fixed width for content */
+  max-height: 60vh; /* Consistent height */
+  overflow-y: auto;
+  text-align: center;
+  margin: auto; /* Center within modal-content */
+}
+
+
+@keyframes modalSlideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+  color: #ff3333;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #00ff00;
+}
+
+/* Slide Header Styling */
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Slide Header Styling */
+.slide-header h2 {
+  font-size: 2em;
+  color: #00ff00;
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px #00ff00;
+}
+
+#slideCounter {
+  font-size: 1em;
+  color: #ff3333;
+  text-align: right;
+}
+
+/* Slide Navigation Buttons */
+.slide-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.slide-controls .slide-btn:last-child {
+  margin-left: auto;
+}
+
+.slide-btn {
+  background-color: #0d0d0d;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.slide-btn:hover {
+  background-color: #00ff00;
+  color: #0d0d0d;
+}
+
+.slide-controls .slide-btn {
+  background-color: #0d0d0d;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 120px; /* Fixed width for consistent sizing */
+}
+
+.slide-controls .slide-btn:hover {
+  background-color: #00ff00;
+  color: #0d0d0d;
+}
