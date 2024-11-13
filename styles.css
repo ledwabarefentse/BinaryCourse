@@ -148,6 +148,8 @@ h2#subtitle {
   z-index: 2;
   padding: 20px;
   overflow: hidden;
+  will-change: transform, opacity;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 /* Modal content styling */

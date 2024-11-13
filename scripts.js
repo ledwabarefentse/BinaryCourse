@@ -16,12 +16,18 @@ video.addEventListener('ended', () => {
 window.onload = () => {
   setTimeout(() => {
     document.getElementById("animatedTitleContainer").classList.add("move-up");
-  }, 5000); // Adjust timing as necessary
+  }, 4000); // Adjust timing as necessary
 
   setTimeout(() => {
     document.getElementById("slideGrid").classList.add("visible");
-  }, 6000);
+  }, 5000);
+
+  setTimeout(() => {
+    document.getElementById("slideGrid").classList.add("visible");
+    setTimeout(loadOverview, 1000); // Display overview popup
+  }, 6000); // Adjust timing if necessary
 };
+
 
 // Sample data for the slides, now with file paths
 const slides = [
@@ -29,11 +35,40 @@ const slides = [
   { title: "Binary vs. Decimal Numbers", file: "lessons/binaryvsdecimal.html" },
   { title: "Converting Binary to Decimal", file: "lessons/conversion_binary_decimal.html" },
   { title: "Converting Decimal to Binary", file: "lessons/conversion_decimal_binary.html" },
-  { title: "Binary Addition", file: "" },
-  { title: "Binary Multiplication", file: "" },
+  { title: "Binary Addition", file: "lessons/binary_addition.html" },
+  { title: "Assessments", file: "lessons/Assessments.html" },
   { title: "Interactive Exercises", file: "lessons/interactive-exercises.html" },
   { title: "For More Information", file: "lessons/moreinfo.html" }
 ];
+
+// Function to fetch and display the overview content
+function loadOverview() {
+  fetch('lessons/overview.html')
+    .then(response => response.text())
+    .then(content => {
+      document.getElementById("modalContent").innerHTML = content;
+      document.getElementById("modalTitle").textContent = "Lesson Overview";
+      document.getElementById("slideCounter").textContent = ""; // No counter for overview
+      
+      // Hide navigation buttons for the overview popup
+      document.getElementById("prevSlide").style.display = "none";
+      document.getElementById("nextSlide").style.display = "none";
+      
+      // Display the modal
+      document.getElementById("modal").style.display = "flex";
+    })
+    .catch(error => console.error("Error loading overview:", error));
+}
+
+
+function showSlide(slideIndex) {
+  // Other existing code here...
+
+  // Show navigation buttons for normal slides
+  document.getElementById("prevSlide").style.display = slideIndex === 0 ? 'none' : 'inline';
+  document.getElementById("nextSlide").style.display = slideIndex === slidesContent.length - 1 ? 'none' : 'inline';
+}
+
 
 // Function to load tiles into the grid
 function loadTiles() {
@@ -106,6 +141,23 @@ function fetchContent(file, title) {
     })
     .catch(error => console.error("Error loading content:", error));
 }
+
+function debounce(func, delay) {
+  let debounceTimer;
+  return function() {
+    const context = this;
+    const args = arguments;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+  };
+}
+
+// Apply debounce to popup opening functions
+document.querySelectorAll('.tile').forEach(tile => {
+  tile.onclick = debounce(() => {
+    // Your code to open the popup
+  }, 100);  // Adjust delay as needed
+});
 
 
 // Load tiles on page load
